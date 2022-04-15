@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
-import { UserDocument } from "./user.model";
 
 export interface ProductDocument extends mongoose.Document {
   user: string;

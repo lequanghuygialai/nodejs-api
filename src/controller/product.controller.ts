@@ -1,19 +1,19 @@
 import { Request, Response } from "express";
-import logger from "../utils/logger";
+import { get } from "lodash";
 import {
   CreateProductInput,
   DeleteProductInput,
   FindProductInput,
-  UpdateProductInput,
+  UpdateProductInput
 } from "../schema/product.schema";
 import {
   createProduct,
   deleteProduct,
   findProduct,
   findProducts,
-  updateProduct,
+  updateProduct
 } from "../service/product.service";
-import { get } from "lodash";
+import { log } from "../utils/logger";
 
 export async function createProductHandler(
   req: Request<{}, {}, CreateProductInput["body"]>,
@@ -27,7 +27,7 @@ export async function createProductHandler(
     });
     return res.send(product);
   } catch (e: any) {
-    logger.error(e);
+    log.error(e);
     return res.status(409).send(e.message);
   }
 }
@@ -52,7 +52,7 @@ export async function updateProductHandler(
     );
     return res.send(productAfterUpdate);
   } catch (e: any) {
-    logger.error(e);
+    log.error(e);
     return res.status(409).send(e.message);
   }
 }
@@ -71,7 +71,7 @@ export async function findProductByIdHandler(
 
     return res.send(product);
   } catch (e: any) {
-    logger.error(e);
+    log.error(e);
     return res.status(409).send(e.message);
   }
 }
@@ -86,7 +86,7 @@ export async function findProductsHandler(req: Request, res: Response) {
 
     return res.send(products);
   } catch (e: any) {
-    logger.error(e);
+    log.error(e);
     return res.status(409).send(e.message);
   }
 }
@@ -105,7 +105,7 @@ export async function deleteProductHandler(
     await deleteProduct({ productId: productId });
     return res.sendStatus(200);
   } catch (e: any) {
-    logger.error(e);
+    log.error(e);
     return res.status(409).send(e.message);
   }
 }

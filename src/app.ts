@@ -1,17 +1,17 @@
-import express from "express";
-import config from "config";
-import connect from "./utils/connect";
-import logger from "./utils/logger";
-import routes from "./utils/routes";
-import desializeUser from "./middleware/deserializeUser";
 import bodyParser from "body-parser";
-import swaggerUi from "swagger-ui-express";
+import config from "config";
+import express from "express";
 import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../swagger.json";
+import desializeUser from "./middleware/deserializeUser";
+import { connect } from "./utils/connect";
+import { log } from "./utils/logger";
+import { routes } from "./utils/routes";
 
 const port = config.get<number>("port");
 const app = express();
-const swaggerAutogen = require("swagger-autogen")();
+// const swaggerAutogen = require("swagger-autogen")();
 
 // const doc = {
 //   info: {
@@ -55,7 +55,7 @@ app.use(
 );
 
 app.listen(port, () => {
-  logger.info(`app running in http://localhost:${port}`);
+  log.info(`app running in http://localhost:${port}`);
   connect();
   routes(app);
 });

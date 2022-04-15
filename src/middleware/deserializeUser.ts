@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { get } from "lodash";
 import { verifyToken } from "../utils/jwt.utils";
 
-const desializeUser = function (
+export default function desializeUser(
   req: Request,
   res: Response,
   next: NextFunction
@@ -14,7 +14,7 @@ const desializeUser = function (
 
   if (!accessToken) {
     return next();
-  }     
+  }
 
   const { decoded, expired } = verifyToken(accessToken);
   if (decoded) {
@@ -23,6 +23,4 @@ const desializeUser = function (
   }
 
   return next();
-};
-
-export default desializeUser;
+}

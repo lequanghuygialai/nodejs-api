@@ -23,7 +23,7 @@ import {
 } from "../schema/product.schema";
 import { createUserSchema } from "../schema/user.schema";
 
-function routes(app: Express) {
+export function routes(app: Express) {
   app.get("/heathcheck", (req, res) => {
     res.sendStatus(200);
     return res;
@@ -60,5 +60,3 @@ function routes(app: Express) {
     deleteProductHandler
   );
 }
-
-export default routes;

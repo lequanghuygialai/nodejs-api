@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import config from "config";
-import logger from "../utils/logger";
+import mongoose from "mongoose";
+import { log } from "../utils/logger";
 
 export interface UserDocument extends mongoose.Document {
   email: string;
@@ -44,7 +44,7 @@ userSchema.methods.comparePassword = async function (
 ): Promise<boolean> {
   const user = this as UserDocument;
   return bcrypt.compare(candidatePassword, user.password).catch((e) => {
-    logger.error(e);
+    log.error(e);
     return false;
   });
 };

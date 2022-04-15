@@ -1,6 +1,6 @@
 import { DocumentDefinition } from "mongoose";
 import UserModel, { UserDocument } from "../models/user.model";
-import logger from "../utils/logger";
+import { log } from "../utils/logger";
 import { omit } from "lodash";
 
 export async function createUser(
@@ -12,7 +12,7 @@ export async function createUser(
     const user = await UserModel.create(input);
     return omit(user.toJSON(), "password");
   } catch (error) {
-    logger.error(error);
+    log.error(error);
     throw error;
   }
 }
@@ -27,13 +27,13 @@ export async function validatePassword({
   const user = await UserModel.findOne({ email });
 
   if (!user) {
-    logger.debug(`User ${email} not found`);
+    log.debug(`User ${email} not found`);
     return false;
   }
 
   const isValid = await user.comparePassword(password);
   if (!isValid) {
-    logger.debug(`Invalid password`);
+    log.debug(`Invalid password`);
     return false;
   }
 

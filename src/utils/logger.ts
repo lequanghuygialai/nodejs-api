@@ -10,4 +10,5 @@ const log = logger({
   timestamp: () => `,"time":"${dayjs().format()}"`,
 });
 
+export { log };
 export default log;
