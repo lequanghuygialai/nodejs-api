@@ -9,7 +9,7 @@ import { connect } from "./utils/connect";
 import { log } from "./utils/logger";
 import { routes } from "./utils/routes";
 
-const port = config.get<number>("port");
+const port = process.env.PORT || config.get<number>("port");
 const app = express();
 // const swaggerAutogen = require("swagger-autogen")();
 
